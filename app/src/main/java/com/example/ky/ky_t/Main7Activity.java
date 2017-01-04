@@ -139,7 +139,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
 
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.i("生命週期", "activity_main2_onCreateOptionsMenu");
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main7, menu);
         return true;
     }
 
