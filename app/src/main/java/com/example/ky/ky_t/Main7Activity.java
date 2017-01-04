@@ -39,6 +39,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
         for(int i = 0; i < 6; i++){
             actors.add(new Actor(names[i], pics[i]));
         }
+        Log.e("====KY onCreate=", "onCreate");
         // 拿到RecyclerView
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         // 设置LinearLayoutManager
@@ -138,7 +139,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.i("生命週期", "activity_main2_onCreateOptionsMenu");
+        Log.i("====KY", "activity_main7_onCreateOptionsMenu");
         getMenuInflater().inflate(R.menu.menu_main7, menu);
         return true;
     }
@@ -158,7 +159,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
             case R.id.action_search:
                 Log.e("====KY Pic=", "remove");
                 makeTextAndShow(Main7Activity.this, "remove",toast.LENGTH_SHORT);
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "remove", Toast.LENGTH_SHORT).show();
                 if (myAdapter.getItemCount() != 0) {
                     actors.remove(myAdapter.getItemCount()-1);
                     mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
