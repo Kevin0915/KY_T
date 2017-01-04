@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@drawable/matt"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/mytextview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold|italic"
+        android:gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/mytextview1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold|italic"
+        android:gravity="center_horizontal"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="horizontal" >
+
+
+
+        <Button
+            android:id="@+id/Button01"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="120sp"
+            android:text=" modem team! "
+            android:layout_weight="0.01" />
+    <Button
+        android:id="@+id/Button02"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="120sp"
+        android:text=" Test Fullscreen! "
+        android:layout_weight="0.01" />
+
+    <Button
+        android:id="@+id/Button07"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="120sp"
+        android:text="Test ViewPager"
+        android:layout_weight="0.01" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/Button06"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="30sp"
+        android:text="想知道楊駭客的功力嗎?試試便知道"
+        android:layout_weight="0.01" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+    <Button
+        android:id="@+id/Button03"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="0sp"
+        android:text=" Test ListView! "
+        android:layout_weight="0.01" />
+
+
+    <Button
+        android:id="@+id/Button04"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="0sp"
+        android:text="Test ImageView! "
+        android:layout_weight="0.01" />
+
+        <Button
+        android:id="@+id/Button05"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="0sp"
+        android:text="Read ImageView! "
+        android:layout_weight="0.01" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+    </LinearLayout>
+</LinearLayout>
