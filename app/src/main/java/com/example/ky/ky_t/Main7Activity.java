@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,7 +29,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
 
     private List<Actor> actors = new ArrayList<Actor>();
 
-    private String[] names = { "Matt", "Matt", "Matt", "Matt", "Matt", "Matt"};
+    private String[] names = { "Matt", "必誠", "萎人", "駭客", "刷存在感", "愛玩ㄇㄟˋ~"};
 
     private String[] pics = { "m1", "m2", "m3", "m4", "m5", "m6"};
 
@@ -43,13 +44,16 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
         // 拿到RecyclerView
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         // 设置LinearLayoutManager
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         // 设置ItemAnimator
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         // 设置固定大小
         mRecyclerView.setHasFixedSize(true);
         // 初始化自定义的适配器
         myAdapter = new MyAdapter(this, actors);
+
         // 为mRecyclerView设置适配器
         mRecyclerView.setAdapter(myAdapter);
     }
@@ -86,6 +90,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
 
         private Context mContext;
 
+
         public MyAdapter( Context context , List<Actor> actors)
         {
             Log.e("====KY MyAdapter=", "建構元");
@@ -99,7 +104,9 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
             // 给ViewHolder设置布局文件
             Log.e("====KY MyAdapter=", "onCreateViewHolder");
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view, viewGroup, false);
-            return new ViewHolder(v);
+            ViewHolder mViewHolder=new ViewHolder(v);
+            mViewHolder.setIsRecyclable(true);
+            return mViewHolder;
         }
 
         @Override
@@ -110,6 +117,7 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
             Actor p = actors.get(i);
             viewHolder.mTextView.setText(p.name);
             viewHolder.mImageView.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
+
         }
 
         @Override
@@ -136,6 +144,9 @@ public class Main7Activity extends AppCompatActivity {//http://blog.csdn.net/a39
                 mImageView = (ImageView) v.findViewById(R.id.pic);
             }
         }
+
+        /**********定義点击事件**********/
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
