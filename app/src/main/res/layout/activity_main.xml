@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:background="@drawable/matt"
+    android:background="@drawable/matt1"
     android:orientation="vertical">
 
 

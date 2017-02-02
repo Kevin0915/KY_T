@@ -13,6 +13,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +22,7 @@
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity
             android:name=".MainActivity"
-            android:label="ＫＹ"
+            android:label="ＫＹ潤滑"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--新增 Service -->
+        <service android:name=".Myservice"/>
+        <service android:name=".Mybservice"/>
+        <!--新增 Service -->
+
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -46,7 +53,9 @@
         <activity android:name=".Main4Activity" />
         <activity android:name=".Main5Activity" />
         <activity android:name=".Main6Activity" />
-        <activity android:name=".Main7Activity"></activity>
+        <activity android:name=".Main7Activity">
+        </activity>
+
     </application>
 
 </manifest>
