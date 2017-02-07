@@ -9,10 +9,18 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -31,11 +39,19 @@
             </intent-filter>
         </activity>
 
-        <!--新增 Service -->
-        <service android:name=".Myservice"/>
-        <service android:name=".Mybservice"/>
-        <!--新增 Service -->
-
+        <!-- 新增 Service -->
+        <service android:name=".Myservice" />
+        <service android:name=".Mybservice" />
+        <!-- 新增 Service -->
+        <!-- 2017/2/2 新增 BOOT_COMPLETED BroadcastReceiver 靜態註冊 -->
+        <receiver
+            android:name=".StaticReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <!-- 2017/2/2 新增 BOOT_COMPLETED BroadcastReceiver 靜態註冊 -->
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -51,11 +67,46 @@
             android:label="ActionBar"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Main4Activity" />
-        <activity android:name=".Main5Activity" />
+        <activity android:name=".Main5Activity"
+                  android:label="Matt白癡史"/>
         <activity android:name=".Main6Activity" />
-        <activity android:name=".Main7Activity">
-        </activity>
+        <activity android:name=".Main7Activity" />
 
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <!-- Google Service版本 -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <!-- 地圖元件 -->
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+
+        <receiver android:name=".KyWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ky_widget_info" />
+        </receiver>
+
+        <activity android:name=".KyWidgetConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

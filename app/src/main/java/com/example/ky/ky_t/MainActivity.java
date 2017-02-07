@@ -41,11 +41,11 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("生命週期", "MainActivity_onCreate");
-        //2017/01/17 BroadcastReceiver
+        //2017/01/17 動態註冊 BroadcastReceiver
         IntentFilter itFilter = new IntentFilter("tw.android.ACTION_01");
         mMyReceiver = new MyBroadcaseReceiver();
         registerReceiver(mMyReceiver, itFilter); //註冊廣播接收器
-        //2017/01/17 BroadcastReceiver
+        //2017/01/17 動態註冊BroadcastReceiver
 
         //2017/01/24 startService
         //開啟 Service
@@ -57,9 +57,12 @@ public class MainActivity extends Activity {
         //2017/01/24 startService
 
         //2017/01/26 bindService
-        Intent intent = new Intent(MainActivity.this, Mybservice.class);
-        bindService(intent, connc, Context.BIND_AUTO_CREATE);
+
+        //Intent intent = new Intent(MainActivity.this, Mybservice.class);
+        //bindService(intent, connc, Context.BIND_AUTO_CREATE);
         //unbindService(connc);
+
+
         //2017/01/26 bindService
 
         setContentView(R.layout.activity_main);
@@ -86,6 +89,7 @@ public class MainActivity extends Activity {
         // myTextView.append("\tExample TextView by corn");
         myTextView1.setTextSize(20);
         myTextView1.setTextColor(Color.RED);
+        //2017/01/17 BroadcastReceiver
         myTextView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +100,13 @@ public class MainActivity extends Activity {
                 startActivity(ie);
                 */
                 Intent intent = new Intent("tw.android.ACTION_01");
+               // Intent intent = new Intent("com.vrinux.static");
                 intent.putExtra("Name", "hellogv");
-                intent.putExtra("Blog", "http://www.jcodecraeer.com");
+                intent.putExtra("Blog", "Matt愛玩~死好");
                 sendBroadcast(intent);
             }
             });
-
+        //2017/01/17 BroadcastReceiver
         button01.setOnTouchListener(new View.OnTouchListener(){
 
             @Override
@@ -110,12 +115,45 @@ public class MainActivity extends Activity {
                 if(event.getAction()==MotionEvent.ACTION_DOWN){  //按下的時候
                     myTextView.setText("大家要高道德標準. ");
                     myTextView.setTextColor(Color.GREEN);
+                    Log.e("====KY onTouch=", "ACTION_DOWN");//step:1
 
                 }
                 if (event.getAction() == MotionEvent.ACTION_UP) {  //起來的時候
                     myTextView.setText("要錢?先說沒辦法. ");
                     myTextView.setTextColor(Color.RED);
+                    Log.e("====KY onTouch=", "ACTION_UP");//step:1
+
+
+
                 }
+                /*
+                if(event.getAction()==MotionEvent.ACTION_MOVE) {
+                    myTextView.setText("阿誠阿呆");
+                    myTextView.setTextColor(Color.RED);
+                    Log.e("====KY onTouch=", "ACTION_MOVE");//step:1
+
+                }
+                */
+                    return false;
+            }
+        });
+
+        button01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myTextView.setText("Click阿呆");
+                myTextView.setTextColor(Color.RED);
+                Log.e("====KY Click=", "Click");//step:1
+
+            }
+        });
+        button01.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+
+                Log.e("====KY onLongClick=", "onLongClick");//step:1
                 return false;
             }
         });
@@ -217,10 +255,11 @@ public class MainActivity extends Activity {
         {
             // TODO Auto-generated method stub
             String name = intent.getStringExtra("Blog");
-            Toast.makeText(MainActivity.this,"動態"+name, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"白癡"+name, Toast.LENGTH_SHORT).show();
         }
     }
     //2017/01/20 BroadcastReceiver
+
 
     //2017/01/26 bindService
     private ServiceConnection connc = new ServiceConnection() {

@@ -19,7 +19,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.ky.ky_t.ScaleImage.makeTextAndShow;
 
 public class Main5Activity extends AppCompatActivity {
-    private GridView gridView;private int[] image = {
+    private GridView gridView;
+    private int[] image = {
             R.drawable.m1, R.drawable.m2, R.drawable.m3,
             R.drawable.m4, R.drawable.m5, R.drawable.m6
 
