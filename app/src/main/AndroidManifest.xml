@@ -67,8 +67,9 @@
             android:label="ActionBar"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Main4Activity" />
-        <activity android:name=".Main5Activity"
-                  android:label="Matt白癡史"/>
+        <activity
+            android:name=".Main5Activity"
+            android:label="Matt白癡史" />
         <activity android:name=".Main6Activity" />
         <activity android:name=".Main7Activity" />
 

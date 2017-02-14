@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -12,12 +13,19 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static com.example.ky.ky_t.R.style.dialog;
 
 public class MainActivity extends Activity {
     private MyBroadcaseReceiver mMyReceiver; //自訂一個繼承 BroadcastReceiver 的類別
@@ -104,6 +112,13 @@ public class MainActivity extends Activity {
                 intent.putExtra("Name", "hellogv");
                 intent.putExtra("Blog", "Matt愛玩~死好");
                 sendBroadcast(intent);
+
+                //new MyDialog(MainActivity.this).imageRes(R.mipmap.ic_launcher).show();
+                //2017/02/08 AlertDialog
+               // normalDialogEvent();
+                //pro_normalDialogEvent();
+                ListDialogEvent();
+                //2017/02/08 AlertDialog
             }
             });
         //2017/01/17 BroadcastReceiver
@@ -295,6 +310,138 @@ public class MainActivity extends Activity {
         toast.show();
     }
 
+
+//2017/02/08 AlertDialog
+
+
+    private void normalDialogEvent() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Matt 午餐時間")//對話方塊的標題
+                .setIcon(R.drawable.m7) //設定標題圖片
+                .setMessage("要含嗎?")//對話方塊的內容
+                .setPositiveButton("想含", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "一次含3支", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("等等含", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "先刷牙", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNeutralButton("嘴好酸", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "流出來了", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        //2017/02/13 實現透明的對話框
+        AlertDialog dialog = myAlertDialog.show();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.alpha = 0.6f;
+        dialog.getWindow().setAttributes(params);
+        //2017/02/13 實現透明的對話框
+    }
+    /*
+         AlertDialog的源码发现三個函数都是protected，所以不能用AlertDialog alertDialog = new AlertDialog()
+
+         需要AlertDialog.Builder build = new AlertDialog.Builder(this);
+    */
+    private void pro_normalDialogEvent() {
+        final AlertDialog build = new AlertDialog.Builder(this).create();
+        View view = getLayoutInflater().inflate(R.layout.pro_dialog_mydialog, null);
+        //把自定义的布局設置到dialog中，注意，布局設置一定要在show之前。从第二个参数分别填充内容与边框之间左、上、右、下、的像素
+        build.setView(view, 0, 0, 0, 0);
+        //一定要先show出来再設置dialog的参数，不然就不会改变dialog的大小了
+
+        build.show();
+        //得到当前显示设备的宽度，单位是像素
+       // int width = getWindowManager().getDefaultDisplay().getWidth();
+        //Log.e("====KY DialogEvent=",width+"");
+        //得到这个dialog界面的参数对象
+        WindowManager.LayoutParams params = build.getWindow().getAttributes();
+        //設置dialog的界面宽度
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        //設置dialog高度为包裹内容
+        params.alpha = 0.8f;
+        //我們可以通過修改對話框佈局參數的 alpha 屬性, 實現透明的對話框.
+        params.height =  WindowManager.LayoutParams.WRAP_CONTENT;
+        //設置dialog的重心
+        params.gravity = Gravity.CENTER;
+        //dialog.getWindow().setLayout(width-(width/6), LayoutParams.WRAP_CONTENT);
+        //用这个方法设置dialog大小也可以，但是这个方法不能设置重心之类的参数，推荐用Attributes设置
+        //最后把这个参数对象设置进去，即与dialog绑定
+        build.getWindow().setAttributes(params);
+        Window window = build.getWindow();
+        window.setWindowAnimations(R.style.mystyle);
+
+        Button leftButton = (Button) view.findViewById(R.id.splash_dialog_left);
+        Button rightButton = (Button) view.findViewById(R.id.splash_dialog_right);
+        Button midButton = (Button) view.findViewById(R.id.splash_dialog_mid);
+        TextView warnMessage = (TextView) view.findViewById(R.id.warnmessage);
+        warnMessage.setText("Matt Dork");
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // downloadApk(downloadurl);
+                Toast.makeText(getApplicationContext(), "一次含3支", Toast.LENGTH_SHORT).show();
+                build.dismiss();
+            }
+        });
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "滿出來了", Toast.LENGTH_SHORT).show();
+                build.dismiss();
+               // loadMainActivity();
+            }
+        });
+        midButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "先刷牙", Toast.LENGTH_SHORT).show();
+                build.dismiss();
+                // loadMainActivity();
+            }
+        });
+
+    }
+
+    private void ListDialogEvent(){
+        final String[] drug = {"通乳丸","通睪丸","治療攝護腺肥大","神經病","砍掉重練"};
+
+        AlertDialog.Builder dialog_list = new AlertDialog.Builder(this);
+        dialog_list.setTitle("Matt 藥單 ");
+        dialog_list.setIcon(R.drawable.m7); //設定標題圖片
+
+        dialog_list.setItems(drug, new DialogInterface.OnClickListener(){
+            @Override
+
+            //只要你在onClick處理事件內，使用which參數，就可以知道按下陣列裡的哪一個了
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                Toast.makeText(MainActivity.this, "Matt需要" + drug[which], Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //2017/02/13
+        AlertDialog dialog = dialog_list.show();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.alpha = 0.9f;
+        dialog.getWindow().setAttributes(params);
+        //整個對話框的特效
+        Window window = dialog.getWindow();
+        window.setWindowAnimations(R.style.mystyle);
+        //整個對話框的特效
+        //2017/02/13
+
+    }
+
+
+    //2017/02/08 AlertDialog
     protected void onStop() {
         // TODO Auto-generated method stub
         super.onStop();

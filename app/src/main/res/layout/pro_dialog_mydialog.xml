@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:text="午餐時間要含嗎?"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/warnmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textColor="#434343"
+        android:textSize="20sp"
+        tools:text="提醒信息" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/splash_dialog_left"
+            style="@android:style/Theme.Dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="想含"
+            android:textColor="#FF0000" />
+        <Button
+            android:id="@+id/splash_dialog_mid"
+            style="@android:style/Theme.Dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="等等含"
+            android:textColor="#000000" />
+        <Button
+            android:id="@+id/splash_dialog_right"
+            style="@android:style/Theme.Dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/splash_dialog_left"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="嘴酸"
+            android:textColor="#45818e" />
+
+    </LinearLayout>
+
+</LinearLayout>
